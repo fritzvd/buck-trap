@@ -1,6 +1,6 @@
 {
   "name": "buck-trap",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Buck Trap helps you to BUmp Changelog Kiss Tag Release and Publish your repo",
   "main": "index.js",
   "scripts": {
