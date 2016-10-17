@@ -24,6 +24,9 @@ var argv = yargs
     .default('t', __dirname + './deploy/auth.json')
     .alias('t', 'token-file')
     .describe('t', 'The file where the token can be found for github')
+    .default('b', 'master')
+    .alias('b', 'branch')
+    .describe('b', 'Which branch should be used for pushing and tagging')
     .help()
     .alias('help', 'h')
     .example('$0', 'Update changelog and tag release')
@@ -44,7 +47,7 @@ if (!argv.h) {
     }
     if (argv.a) {
       // otherwise a release can't be drafted
-      exec('git push --follow-tags origin master')
+      exec('git push --follow-tags origin ' + argv.b)
       var pkg = require(__dirname + '/package.json')
       var tmpDir = __dirname + '/tmp/' 
       var fileName = pkg.version + '.zip'
