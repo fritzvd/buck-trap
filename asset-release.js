@@ -12,7 +12,6 @@ function startRelease (fileName, pkg, token, tmpDir) {
 
   function uploadAssets (err, body) {
     if (err) {
-      console.log(err.body, 'bla')
       if (parseInt(err.statusCode) === 422) {
         console.log(`
           Error: ` + err.body + `\n
@@ -27,7 +26,7 @@ function startRelease (fileName, pkg, token, tmpDir) {
     }
     console.log('Created release, getting ready to upload assets')
     var ghrelease = client.release(pkg.repository.name, body.id)
-    var readArchive = fs.readFileSync(fileName)
+    var readArchive = fs.readFileSync(tmpDir + fileName)
 
     var htmlUrl = body.html_url
 

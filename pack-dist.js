@@ -6,7 +6,7 @@ function packDist (distDir, tmpDir, fileName) {
   rimraf.sync(tmpDir)
   fs.mkdirSync(tmpDir)
 
-  var writeFileStream = fs.createWriteStream(fileName)
+  var writeFileStream = fs.createWriteStream(tmpDir + fileName)
   var archive = archiver.create('zip', {})
 
   archive.pipe(writeFileStream)
