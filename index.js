@@ -4,6 +4,7 @@ var yargs = require('yargs')
 var standardVersion = require('standard-version')
 var packDist = require('./pack-dist')
 var assetRelease = require('./asset-release')
+var exec = require('child_process').execSync
 
 var argv = yargs
     .usage('Usage: $0 <cmd> [options]')
@@ -17,10 +18,10 @@ var argv = yargs
     .describe('i', 'File to which changes should be written')
     .alias('a', 'assets')
     .describe('a', 'Assets should also be uploaded to the release')
-    .default('af', __dirName + '/dist')
+    .default('af', __dirname + '/dist')
     .alias('af', 'asset-folder')
     .describe('af', 'Pick the asset folder')
-    .default('t', __dirName + './deploy/auth.sjon')
+    .default('t', __dirname + './deploy/auth.json')
     .alias('t', 'token-file')
     .describe('t', 'The file where the token can be found for github')
     .help()
@@ -30,26 +31,29 @@ var argv = yargs
     .wrap(80)
     .argv
 
-//standardVersion({
-  //noVerify: argv.no,
-  //silent: argv.si,
-  //infile: argv.i
-//}, , function (err) {
-  //if (err) {
-    //console.error(`standard-version failed with message: ${err.message}`)
-  //}
-  //// standard-version is done
-//})
 
-
-if (argv.a) {
-  var pkg = require(__dirName + '/package.json')
-  var tmpDir = __dirname + '/tmp/' 
-  var fileName = tmpDir + version + '.zip'
-  var archive = packDist(argv.af, tmpDir, pkg.version)
-  var token = require(argv.t).token
-  archive.on('finish', function () {
-    console.log('finished creating a zip, getting ready to upload assets')
-    assetRelease(fileName, pkg, token, tmpDir)
+// don't do anything if help flag is true
+if (!argv.h) {
+  standardVersion({
+    noVerify: argv.no,
+    silent: argv.si,
+    infile: argv.i
+  }, function (err) {
+    if (err) {
+      console.error(`standard-version failed with message: ${err.message}`)
+    }
+    exec('git push --follow-tags origin master')
   })
+
+  if (argv.a) {
+    var pkg = require(__dirname + '/package.json')
+    var tmpDir = __dirname + '/tmp/' 
+    var fileName = tmpDir + pkg.version + '.zip'
+    var archive = packDist(argv.af, tmpDir, pkg.version)
+    var token = require(argv.t).token
+    archive.on('finish', function () {
+      console.log('finished creating a zip, getting ready to upload assets')
+        assetRelease(fileName, pkg, token, tmpDir)
+    })
+  }
 }

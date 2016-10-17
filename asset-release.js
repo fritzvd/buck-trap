@@ -1,17 +1,18 @@
 var fs = require('fs')
 var github = require('octonode')
+var rimraf = require('rimraf')
 
 function startRelease (fileName, pkg, token, tmpDir) {
   var client = github.client(token)
   var ghrepo = client.repo(pkg.repository.name)
   ghrepo.release({
-    tag_name: pkg.version,
+    tag_name: 'v' + pkg.version,
     draft: false
   }, uploadAssets)
 
   function uploadAssets (err, body) {
     if (err) {
-      console.log(err.body)
+      console.log(err.body, 'bla')
       if (parseInt(err.statusCode) === 422) {
         console.log(`
           Error: ` + err.body + `\n
@@ -54,13 +55,15 @@ function startRelease (fileName, pkg, token, tmpDir) {
 
 }
 
-function findRelease () {
-  ghrepo.releases(function (err, body) {
-    return body.filter(function (release) {
-      if (release.tag_name === require('./package.json').version) {
-        var ghrelease = client.release(pkg.repository.name, release.id)
-        uploadAssets(ghrelease)
-      }
-    })
-  })
-}
+//function findRelease () {
+  //ghrepo.releases(function (err, body) {
+    //return body.filter(function (release) {
+      //if (release.tag_name === require('./package.json').version) {
+        //var ghrelease = client.release(pkg.repository.name, release.id)
+        //uploadAssets(ghrelease)
+      //}
+    //})
+  //})
+//}
+
+module.exports = startRelease

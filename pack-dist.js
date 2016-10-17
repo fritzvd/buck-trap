@@ -1,4 +1,5 @@
 var fs = require('fs')
+var rimraf = require('rimraf')
 var archiver = require('archiver')
 
 function packDist (distDir, tmpDir, fileName) {
