@@ -9,7 +9,7 @@ Buck Trap helps you to BUmp Changelog Kiss Tag Release and Publish your repo
 
 Now add the following to your package.json scripts section
 
-    "buck-trap" "buck-trap -a -t ./path/to/auth.json-file -af path/to/dist/folder"
+    "buck-trap": "buck-trap -a -t ./path/to/auth.json-file -af path/to/dist/folder"
 
 
 The auth.json file should like similar to this:
