@@ -2,8 +2,8 @@
 
 var yargs = require('yargs')
 var standardVersion = require('standard-version')
-var packDist = require('./pack-dist')
-var assetRelease = require('./asset-release')
+var packDist = require('./lib/pack-dist')
+var assetRelease = require('./lib/asset-release')
 var exec = require('child_process').execSync
 
 var argv = yargs
@@ -42,8 +42,9 @@ if (!argv.h) {
     if (err) {
       console.error(`standard-version failed with message: ${err.message}`)
     }
-    exec('git push --follow-tags origin master')
     if (argv.a) {
+      // otherwise a release can't be drafted
+      exec('git push --follow-tags origin master')
       var pkg = require(__dirname + '/package.json')
       var tmpDir = __dirname + '/tmp/' 
       var fileName = pkg.version + '.zip'
