@@ -33,7 +33,7 @@ function startRelease (fileName, pkg, token, tmpDir) {
 
     ghrelease.uploadAssets(readArchive, {
       contentType: 'application/zip',
-      name: version + '.zip',
+      name: fileName,
       size: readArchive.length
     }, function (requesterr, status, respbody, headers) {
       if (requesterr) {
