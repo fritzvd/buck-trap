@@ -43,17 +43,17 @@ if (!argv.h) {
       console.error(`standard-version failed with message: ${err.message}`)
     }
     exec('git push --follow-tags origin master')
+    if (argv.a) {
+      var pkg = require(__dirname + '/package.json')
+      var tmpDir = __dirname + '/tmp/' 
+      var fileName = tmpDir + pkg.version + '.zip'
+      var archive = packDist(argv.af, tmpDir, fileName)
+      var token = require(argv.t).token
+      archive.on('finish', function () {
+        console.log('finished creating a zip, getting ready to upload assets')
+          assetRelease(fileName, pkg, token, tmpDir)
+      })
+    }
   })
 
-  if (argv.a) {
-    var pkg = require(__dirname + '/package.json')
-    var tmpDir = __dirname + '/tmp/' 
-    var fileName = tmpDir + pkg.version + '.zip'
-    var archive = packDist(argv.af, tmpDir, fileName)
-    var token = require(argv.t).token
-    archive.on('finish', function () {
-      console.log('finished creating a zip, getting ready to upload assets')
-        assetRelease(fileName, pkg, token, tmpDir)
-    })
-  }
 }
