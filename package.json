@@ -8,8 +8,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fritzvd/buck-trap.git",
-    "name": "fritzvd/buck-trap"
+    "url": "git+https://github.com/nens/buck-trap.git",
+    "name": "nens/buck-trap"
   },
   "bin": {
     "buck-trap": "./index.js"
@@ -18,11 +18,11 @@
     "release"
   ],
   "author": "fritzvd",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/fritzvd/buck-trap/issues"
+    "url": "https://github.com/nens/buck-trap/issues"
   },
-  "homepage": "https://github.com/fritzvd/buck-trap#readme",
+  "homepage": "https://github.com/nens/buck-trap#readme",
   "dependencies": {
     "archiver": "^1.1.0",
     "octonode": "^0.7.6",
