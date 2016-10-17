@@ -49,7 +49,7 @@ if (!argv.h) {
     var pkg = require(__dirname + '/package.json')
     var tmpDir = __dirname + '/tmp/' 
     var fileName = tmpDir + pkg.version + '.zip'
-    var archive = packDist(argv.af, tmpDir, pkg.version)
+    var archive = packDist(argv.af, tmpDir, fileName)
     var token = require(argv.t).token
     archive.on('finish', function () {
       console.log('finished creating a zip, getting ready to upload assets')
