@@ -55,15 +55,4 @@ function startRelease (fileName, pkg, token, tmpDir) {
 
 }
 
-//function findRelease () {
-  //ghrepo.releases(function (err, body) {
-    //return body.filter(function (release) {
-      //if (release.tag_name === require('./package.json').version) {
-        //var ghrelease = client.release(pkg.repository.name, release.id)
-        //uploadAssets(ghrelease)
-      //}
-    //})
-  //})
-//}
-
 module.exports = startRelease

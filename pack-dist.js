@@ -11,7 +11,7 @@ function packDist (distDir, tmpDir, fileName) {
 
   archive.pipe(writeFileStream)
 
-  var destinationWithinZip = './'
+  var destinationWithinZip = ''
   archive.directory(distDir, destinationWithinZip)
   archive.finalize()
 

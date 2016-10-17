@@ -46,7 +46,7 @@ if (!argv.h) {
     if (argv.a) {
       var pkg = require(__dirname + '/package.json')
       var tmpDir = __dirname + '/tmp/' 
-      var fileName = tmpDir + pkg.version + '.zip'
+      var fileName = pkg.version + '.zip'
       var archive = packDist(argv.af, tmpDir, fileName)
       var token = require(argv.t).token
       archive.on('finish', function () {
