@@ -51,7 +51,7 @@ if (!argv.h) {
       exec('git push --follow-tags origin ' + argv.b)
       var pkg = require(cwd + '/package.json')
       var tmpDir = cwd + '/tmp/' 
-      var fileName = pkg.version + '.zip'
+      var fileName = 'v' + pkg.version + '.zip'
       var archive = packDist(argv.af, tmpDir, fileName)
       var token = require(argv.t).token
       archive.on('finish', function () {
