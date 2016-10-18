@@ -22,7 +22,7 @@ var argv = yargs
     .default('af', cwd + '/dist')
     .alias('af', 'asset-folder')
     .describe('af', 'Pick the asset folder')
-    .default('t', cwd + './deploy/auth.json')
+    .default('t', cwd + '/deploy/auth.json')
     .alias('t', 'token-file')
     .describe('t', 'The file where the token can be found for github')
     .default('b', 'master')
