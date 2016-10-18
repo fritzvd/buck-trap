@@ -9,11 +9,31 @@ Buck Trap helps you to BUmp Changelog Kiss Tag Release and Publish your repo
 
 Now add the following to your package.json scripts section
 
-    "buck-trap": "buck-trap -a"
+	"buck-trap": "buck-trap -a"
+
+So e.g.:
+
+	"scripts": {
+		"test": "tape tests/*",
+		"buck-trap": "buck-trap -a"
+	},
+	"dependencies": { 
+	    "buck-trap": "1.0.14"
+	}
 
 Or if you don't like the defaults (`deploy/auth.json` for the token file and `dist` folder for the build folder)
 
     "buck-trap": "buck-trap -a -t /absoulute/path/to/auth.json-file -af /absoulute/path/to/dist/folder"
+
+Also add the name of your project to the repository section:
+    "name": "organisation/repo-name"
+
+So for example:
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/nens/buck-trap.git",
+		"name": "nens/buck-trap"
+	},
 
 
 The auth.json file should like similar to this:
