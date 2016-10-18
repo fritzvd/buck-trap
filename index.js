@@ -6,6 +6,7 @@ var packDist = require('./lib/pack-dist')
 var assetRelease = require('./lib/asset-release')
 var exec = require('child_process').execSync
 
+var cwd = process.cwd()
 var argv = yargs
     .usage('Usage: $0 <cmd> [options]')
     .boolean(['n', 's', 'a'])
@@ -18,10 +19,10 @@ var argv = yargs
     .describe('i', 'File to which changes should be written')
     .alias('a', 'assets')
     .describe('a', 'Assets should also be uploaded to the release')
-    .default('af', __dirname + '/dist')
+    .default('af', cwd + '/dist')
     .alias('af', 'asset-folder')
     .describe('af', 'Pick the asset folder')
-    .default('t', __dirname + './deploy/auth.json')
+    .default('t', cwd + './deploy/auth.json')
     .alias('t', 'token-file')
     .describe('t', 'The file where the token can be found for github')
     .default('b', 'master')
@@ -48,8 +49,8 @@ if (!argv.h) {
     if (argv.a) {
       // otherwise a release can't be drafted
       exec('git push --follow-tags origin ' + argv.b)
-      var pkg = require(__dirname + '/package.json')
-      var tmpDir = __dirname + '/tmp/' 
+      var pkg = require(cwd + '/package.json')
+      var tmpDir = cwd + '/tmp/' 
       var fileName = pkg.version + '.zip'
       var archive = packDist(argv.af, tmpDir, fileName)
       var token = require(argv.t).token
