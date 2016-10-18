@@ -26,6 +26,7 @@
   "dependencies": {
     "archiver": "^1.1.0",
     "octonode": "^0.7.6",
+    "rimraf": "^2.5.4",
     "standard-version": "^3.0.0",
     "yargs": "^6.0.0"
   }
