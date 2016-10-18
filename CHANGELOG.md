@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.8"></a>
+## [1.0.8](https://github.com/nens/buck-trap/compare/v1.0.7...v1.0.8) (2016-10-18)
+
+
+### Bug Fixes
+
+* **directory-bug:** typo ([36f3383](https://github.com/nens/buck-trap/commit/36f3383))
+
+
+
 <a name="1.0.7"></a>
 ## [1.0.7](https://github.com/nens/buck-trap/compare/v1.0.6...v1.0.7) (2016-10-18)
 
