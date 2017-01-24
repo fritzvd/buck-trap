@@ -2,6 +2,7 @@
 
 var yargs = require('yargs')
 var standardVersion = require('standard-version')
+var addVersion = require('./lib/add-version')
 var packDist = require('./lib/pack-dist')
 var assetRelease = require('./lib/asset-release')
 var exec = require('child_process').execSync
@@ -50,8 +51,9 @@ if (!argv.h) {
       // otherwise a release can't be drafted
       exec('git push --follow-tags origin ' + argv.b)
       var pkg = require(cwd + '/package.json')
-      var tmpDir = cwd + '/tmp/' 
       var fileName = 'v' + pkg.version + '.zip'
+      addVersion(argv.af, pkg.name, pkg.version)
+      var tmpDir = cwd + '/tmp/'
       var archive = packDist(argv.af, tmpDir, fileName)
       var token = require(argv.t).token
       archive.on('finish', function () {
