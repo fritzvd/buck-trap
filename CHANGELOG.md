@@ -5,7 +5,9 @@ All notable changes to this project will be documented in this file. See [standa
 <a name="1.0.14"></a>
 ## [1.0.14](https://github.com/nens/buck-trap/compare/v1.0.13...v1.0.14) (2016-10-18)
 
+### Bug Fixes
 
+* Fixed acronym explanation in the readme.
 
 <a name="1.0.13"></a>
 ## [1.0.13](https://github.com/nens/buck-trap/compare/v1.0.12...v1.0.13) (2016-10-18)
