@@ -5,6 +5,24 @@ var standardVersion = require('standard-version')
 var packDist = require('./lib/pack-dist')
 var assetRelease = require('./lib/asset-release')
 var exec = require('child_process').execSync
+var readline = require('readline')
+
+var rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+function exec_cb(prompt, cb) {
+  rl.question(prompt, function (ans) {
+    rl.close();
+    if (ans && ans[0].toUpperCase() === 'Y') {
+      console.log("OK, we will upload the archive to github.com");
+      cb();
+    } else {
+      console.log("Aborting upload of archive.");
+    }
+  });
+}
 
 var cwd = process.cwd()
 var argv = yargs
@@ -50,13 +68,17 @@ if (!argv.h) {
       // otherwise a release can't be drafted
       exec('git push --follow-tags origin ' + argv.b)
       var pkg = require(cwd + '/package.json')
-      var tmpDir = cwd + '/tmp/' 
+      var tmpDir = cwd + '/tmp/'
       var fileName = 'v' + pkg.version + '.zip'
       var archive = packDist(argv.af, tmpDir, fileName)
       var token = require(argv.t).token
       archive.on('finish', function () {
         console.log('finished creating a zip, getting ready to upload assets')
+        var size = archive.pointer();
+        console.log("The size of the release/archive is: " + size + " bytes..");
+        exec_cb("Are yo sure you want to upload this to Github? ", function () {
           assetRelease(fileName, pkg, token, tmpDir)
+        });
       })
     }
   })
